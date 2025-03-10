@@ -52,6 +52,7 @@ void stats1(struct player *joueur){
 }
 
 // Fonction pour gérer un événement interactif
+// Quète numéro 1
 void evenement(struct player *joueur) {
     printf("\nVous vous reveillez au beau milieu d'une forêt, en sous-vêtements, une bourse contenant 100 pièces d'or accroché à votre taille, sans aucun souvenirs, trois chemins s'offrent à vous. Que faites-vous ?\n");
     printf("1. Prendre le sentier de gauche nimbé de ténèbres qui s'enfonce dans la forêt.\n");
@@ -71,21 +72,43 @@ void evenement(struct player *joueur) {
             case 1:
             printf("\nVous vous enfoncez dans les bois et trouvez un coffre abandonné. Vous obtenez un sous-vêtement blindé et de l'or\n");
             printf("Vous obtenez 100 pièces d'or, c'est beaucoup !\n");
-                joueur->or += 100;
-                joueur->event += 1;
-                break;
+            joueur->or += 100;
+            joueur->event += 1;
+            break;
             case 2:
             printf("\nUn gorille albinos parlant se dresse devant vous. Il se nomme Brandon et affirme qu'il doit vous tester physiquement ! Vous perdez 15 PV, ce fut violent.\n");
-                joueur->pv -= 15;
-                joueur->event += 1;
-                break;
+            joueur->pv -= 15;
+            joueur->event += 1;
+            break;
             case 3:
             printf("\nVous trébuchez lamentablement après vous être cogné le petit orteil sur une souche, vous perdez 15 points d'endurance.\n");
-                joueur->endurance -= 15;
-                joueur->event += 1;
-                break;
+            joueur->endurance -= 15;
+            joueur->event += 1;
+            break;
             default:
-                printf("\nChoix invalide, essayez encore.\n");
+            printf("\nChoix invalide, essayez encore.\n");
+            
+            
+            if (joueur->pv = 0) {
+                printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
+                break;
+            
+            }  
+            if (joueur->or = 1000) {
+                printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
+                break;
+    
+            }      
+            if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
+                printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
+                break;
+    
+            }    
+            if (joueur->endurance <= 0) joueur->pv--; {
+                printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
+                break;
+    
+            }    
         }
     } while (choix < 1 || choix > 3);
     
@@ -93,6 +116,7 @@ void evenement(struct player *joueur) {
 }
 
 // Fonction pour enchaîner plusieurs événements
+// Quète numéro 2
 void suite_evenements(struct player *joueur) {
     int choix;
     printf("\nTant bien que mal, vous arrivez devant une auberge perdu au milieu des bois.\n");
@@ -129,12 +153,33 @@ void suite_evenements(struct player *joueur) {
                 break;
             default:
                 printf("\nChoix invalide, essayez encore.\n");
+
+                if (joueur->pv = 0) {
+                    printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
+                    break;
+                
+                }  
+                if (joueur->or = 1000) {
+                    printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
+                    break;
+        
+                }      
+                if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
+                    printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
+                    break;
+        
+                }    
+                if (joueur->endurance <= 0) joueur->pv--; {
+                    printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
+                    break;
+        
+                }  
         }
     } while (choix < 1 || choix > 3);
     
     stats1(joueur);
 
-    //quète numéro 3
+    // Quète numéro 3
     printf("\nVous finissez par arriver devant un autel étrange, où un vieil homme luisant à la peau mauve tout aussi étrange s'adresse à vous.\n");
     printf("J'ai remarqué ton slip majestueux, et j'ai décidé de t'accorder trois souhaits !\n");
     printf("1. Vous décidez de lui demander la santé, car la santé c'est la vie.\n");
@@ -175,6 +220,27 @@ void suite_evenements(struct player *joueur) {
             break;
         default:
             printf("\nChoix invalide, essayez encore.\n");
+
+            if (joueur->pv = 0) {
+                printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
+                break;
+            
+            }  
+            if (joueur->or = 1000) {
+                printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
+                break;
+    
+            }      
+            if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
+                printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
+                break;
+    
+            }    
+            if (joueur->endurance <= 0) joueur->pv--; {
+                printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
+                break;
+    
+            }  
         }
     } while (choix < 1 || choix > 3);
         stats1(joueur);
@@ -225,6 +291,27 @@ void suite_evenements(struct player *joueur) {
             break;
         default:
             printf("\nChoix invalide, essayez encore.\n"); //Vous pouvez très bien changer le texte d'évènement choix invalide, si vous le souhaitez
+
+                        if (joueur->pv = 0) {
+                printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
+                break;
+            
+            }  
+            if (joueur->or = 1000) {
+                printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
+                break;
+    
+            }      
+            if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
+                printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
+                break;
+    
+            }    
+            if (joueur->endurance <= 0) joueur->pv--; {
+                printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
+                break;
+    
+            }  
         }
     } while (choix < 1 || choix > 3);
         stats1(joueur); //Affichera le stats du joueur à la fin de chaque suite d'évènement en appliquant les changements liés aux choix
@@ -260,6 +347,7 @@ int main() {
 
     evenement(&joueur);
     suite_evenements(&joueur);
+
 
     // Demande au joueur s'il veut sauvegarder sa partie
     printf("\nSauvegarder la progression ? (o/n) : ");
