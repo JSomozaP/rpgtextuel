@@ -4,16 +4,17 @@
 
 #define BUF_SIZE 255  //taille du buffer pour la lecture de chaînes de caractères
 
+
 //structure representant le joueur 1 et ses stats
 struct player {
     int pv;
     int endurance;
     char nomjoueur[20];
     int or;
-    int event;
+    int event;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 };
 
-//fonction pour supprimer le retour à la ligne d'une chaîne de caractères quand obtenu avec fgets
+//fonction pour supprimer le retour à la ligne d'une chaîne de caractères quand obtenu avec fgets 
 void noretour (char *str) {
     size_t len=strlen(str);
     if(len>0 && str[len - 1]== '\n'){
@@ -51,6 +52,31 @@ void stats1(struct player *joueur){
     printf("-------------------------------------\n");
 }
 
+    void malusbonus (struct player *joueur){
+
+    if (joueur->pv <= 0) {
+        printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
+        exit(0);
+
+    }  
+    if (joueur->or >= 1000) {
+        printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont remplies d'or\n");
+        exit(0);
+
+    }      
+    if (joueur->or <= 0) {
+        printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 5 points de vie et d'endurance par tour\n");
+        joueur->endurance -=5;
+        joueur->pv -=5;
+
+    }    
+    if (joueur->endurance <= 0) {
+        printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez 5 points de vie par tour\n");
+        joueur->pv -=5;
+
+    }   
+} 
+
 // Fonction pour gérer un événement interactif
 // Quète numéro 1
 void evenement(struct player *joueur) {
@@ -67,6 +93,7 @@ void evenement(struct player *joueur) {
             while (getchar() != '\n'); // Nettoie le buffer
             continue;
         }
+        
         
         switch (choix) {
             case 1:
@@ -89,26 +116,6 @@ void evenement(struct player *joueur) {
             printf("\nChoix invalide, essayez encore.\n");
             
             
-            if (joueur->pv = 0) {
-                printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
-                break;
-            
-            }  
-            if (joueur->or = 1000) {
-                printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
-                break;
-    
-            }      
-            if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
-                printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
-                break;
-    
-            }    
-            if (joueur->endurance <= 0) joueur->pv--; {
-                printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
-                break;
-    
-            }    
         }
     } while (choix < 1 || choix > 3);
     
@@ -119,9 +126,9 @@ void evenement(struct player *joueur) {
 // Quète numéro 2
 void suite_evenements(struct player *joueur) {
     int choix;
-    printf("\nTant bien que mal, vous arrivez devant une auberge perdu au milieu des bois.\n");
+    printf("\nTant bien que mal, vous arrivez devant une auberge perdue au milieu des bois.\n");
     printf("Que faites-vous ?\n");
-    printf("1. Entrer pour prendre un repas et glaner quelques informations pour enfin comprendre où vous êtes.\n");
+    printf("1. Entrez pour prendre un repas et glaner quelques informations pour enfin comprendre où vous êtes.\n");
     printf("2. Vous ne tentez pas le diable et decidez de continuer votre route. Cette auberge est trop louche.\n");
     printf("3. Vous apercevez un client éméché affalé au sol, et vous décidez de lui faire les poches pour trouver un objet utile.\n");
     
@@ -140,45 +147,25 @@ void suite_evenements(struct player *joueur) {
                 joueur->or -= 15;
                 joueur->event += 1;
                 break;
-            case 2:
+                case 2:
                 printf("\nVous continuez votre chemin en remarquant que vous êtes suivis par un groupe de personnes encapuchonnés, vous vous enfuyez de toutes vos forces et perdez 20 pt d'endurance.\n");
                 joueur->endurance -= 20;
                 joueur->event += 1;
                 break;
-            case 3:
+                case 3:
                 printf("\nVous parvenez à lui dérober une belle bourse de 150 pièces d'or, c'est incroyable ! Malheureusement le pochtron se reveil et vous saute dessus. Vous parvenez finalement à le neutraliser, mais vous perdez 30 pv dans la bagarre.\n");
                 joueur->or += 150;
                 joueur->pv -= 30;
                 joueur->event += 1;
                 break;
-            default:
+                default:
                 printf("\nChoix invalide, essayez encore.\n");
-
-                if (joueur->pv = 0) {
-                    printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
-                    break;
                 
-                }  
-                if (joueur->or = 1000) {
-                    printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
-                    break;
-        
-                }      
-                if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
-                    printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
-                    break;
-        
-                }    
-                if (joueur->endurance <= 0) joueur->pv--; {
-                    printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
-                    break;
-        
-                }  
         }
     } while (choix < 1 || choix > 3);
     
     stats1(joueur);
-
+    
     // Quète numéro 3
     printf("\nVous finissez par arriver devant un autel étrange, où un vieil homme luisant à la peau mauve tout aussi étrange s'adresse à vous.\n");
     printf("J'ai remarqué ton slip majestueux, et j'ai décidé de t'accorder trois souhaits !\n");
@@ -194,23 +181,23 @@ void suite_evenements(struct player *joueur) {
             while (getchar() != '\n');
             continue;
         }
-    
-    switch (choix) {
-        case 1:
+        
+        switch (choix) {
+            case 1:
             printf("\nLe vieux se met à tourner rapidement sur lui même en hurlant, vous vous sentez très mal, et perdez 70 points de vie !\n");
             printf("La prochaine fois, tu ne fera pas confiance à la première personne que tu croise, merci pour ton énérgie vitale !\n");
             printf("Le vieux disparait dans une ricanement infernal.\n");
             joueur->pv -= 70;
             joueur->event+=1;
             break;
-        case 2:
+            case 2:
             printf("\nLe vieux s'avance vers vous et vous met un énorme coup de genou dans les parties. Vous tombez au sol et perdez 50 points d'endurance\n");
             printf("Voilà, grâce à moi, tu souffrira moins la prochaine fois qu'on te frappera à cet endroit, tu es devenu plus endurant !\n");
             printf("il disparait en ricanant\n");
             joueur->endurance -=50;
             joueur->event+=1;
             break;
-        case 3:
+            case 3:
             printf("\nLe vieux s'avance vers vous, subtilise l'entiéreté de votre bourse, puis vous redonne 10 pièces d'or\n");
             printf("Voilà, maintenant tu as gagné 10 pièces d'or, et tu as plus d'or que quelqu'un qui n'en a pas, tu es plus heureux ?\n");
             printf("Le vieux disparait en ricanant\n");
@@ -218,29 +205,9 @@ void suite_evenements(struct player *joueur) {
             joueur->or += 10;
             joueur->event+=1;
             break;
-        default:
+            default:
             printf("\nChoix invalide, essayez encore.\n");
-
-            if (joueur->pv = 0) {
-                printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
-                break;
             
-            }  
-            if (joueur->or = 1000) {
-                printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
-                break;
-    
-            }      
-            if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
-                printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
-                break;
-    
-            }    
-            if (joueur->endurance <= 0) joueur->pv--; {
-                printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
-                break;
-    
-            }  
         }
     } while (choix < 1 || choix > 3);
         stats1(joueur);
@@ -248,28 +215,28 @@ void suite_evenements(struct player *joueur) {
         //RAJOUTEZ VOS PROPRES QUETES
         //Servez-vous de l'interface ci-dessous pour rajouter vos propres quètes, retirez juste les balises /* et */ lorsque vous êtes invités à le faire
         //Il vous suffira ensuite de seulement copier/coller le template de quète pour adapter les votres
-
-    /*
-    //supprimez "/*" au dessus pour rendre le template utilisable
-    
-    //quète numéro X (Pas besoin de supprimer la balise de commentaire içi, c'est plus un repère pour comptabiliser vos questions)
-    printf("\nVeuilez écrire ici le texte d'ambiance de l'évènement\n"); //Vous pouvez écrire l'évènement sur plusieurs lignes si besoin
-    printf("Vous pouvez écrire ici la suite de l'évènement; Rajoutez d'autre lignes si besoin\n");
-    printf("1. Veuillez écrire ici le premier choix\n"); //n'enlevez pas les \n , ils permettent de faire des retour à la ligne
-    printf("2. Veuillez écrire ici le second choix\n");
-    printf("3. Veuillez écrire ici le troisième choix\n");
-    
-    
-    do {
-        printf("\nVotre choix : "); //Vous pouvez mettre autres choses que "votre choix" si vous voulez
-        if (scanf("%d", &choix) != 1) {
-            printf("\nEntrée invalide\n"); //"entrée invalide" peut être modifié également
-            while (getchar() != '\n');
-            continue;
-        }
-    
-    switch (choix) {
-        case 1:
+        
+        /*
+        //supprimez "/*" au dessus pour rendre le template utilisable
+        
+        //quète numéro X (Pas besoin de supprimer la balise de commentaire içi, c'est plus un repère pour comptabiliser vos questions)
+        printf("\nVeuilez écrire ici le texte d'ambiance de l'évènement\n"); //Vous pouvez écrire l'évènement sur plusieurs lignes si besoin
+        printf("Vous pouvez écrire ici la suite de l'évènement; Rajoutez d'autre lignes si besoin\n");
+        printf("1. Veuillez écrire ici le premier choix\n"); //n'enlevez pas les \n , ils permettent de faire des retour à la ligne
+        printf("2. Veuillez écrire ici le second choix\n");
+        printf("3. Veuillez écrire ici le troisième choix\n");
+        
+        
+        do {
+            printf("\nVotre choix : "); //Vous pouvez mettre autres choses que "votre choix" si vous voulez
+            if (scanf("%d", &choix) != 1) {
+                printf("\nEntrée invalide\n"); //"entrée invalide" peut être modifié également
+                while (getchar() != '\n');
+                continue;
+                }
+                
+                switch (choix) {
+                    case 1:
             printf("\nTexte d'évènement suite au choix numéro 1, rajoutez d'autres printf en dessous pour rajouter des lignes\n");
             //Valeurs de changement de statut, si le statut diminu : -=
             //si le statut augmente : +=
@@ -278,46 +245,26 @@ void suite_evenements(struct player *joueur) {
             joueur->pv -= 70; // seulement mettre les valeurs qui fluctuent. Pas besoin d'entrer la valeur endurance, si celle-ci ne bouge pas
             joueur->event+=1;
             break;
-        case 2:
+            case 2:
             printf("\nTexte d'évènement suite au choix numéro 2\n");
             joueur->endurance -=50;
             joueur->event+=1;
             break;
-        case 3:
+            case 3:
             printf("\nTexte d'évènement suite au choix numéro 3\n");
             joueur->or = 0;
             joueur->or += 10;
             joueur->event+=1;
             break;
-        default:
+            default:
             printf("\nChoix invalide, essayez encore.\n"); //Vous pouvez très bien changer le texte d'évènement choix invalide, si vous le souhaitez
-
-                        if (joueur->pv = 0) {
-                printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
-                break;
             
-            }  
-            if (joueur->or = 1000) {
-                printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont replies d'or\n");
-                break;
-    
-            }      
-            if (joueur->or <= 0) joueur->endurance--, joueur->pv--; {
-                printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 1 point de vie et d'endurance par tour\n");
-                break;
-    
-            }    
-            if (joueur->endurance <= 0) joueur->pv--; {
-                printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez un point de vie par tour\n");
-                break;
-    
-            }  
+            }
+            } while (choix < 1 || choix > 3);
+            stats1(joueur); //Affichera le stats du joueur à la fin de chaque suite d'évènement en appliquant les changements liés aux choix
+            //supprimer la balise "* /" en dessous pour rendre le template utilisable
+            */
         }
-    } while (choix < 1 || choix > 3);
-        stats1(joueur); //Affichera le stats du joueur à la fin de chaque suite d'évènement en appliquant les changements liés aux choix
-        //supprimer la balise "* /" en dessous pour rendre le template utilisable
-        */
-}
 
 int main() {
     struct player joueur;
@@ -341,14 +288,15 @@ int main() {
         fgets(joueur.nomjoueur, sizeof(joueur.nomjoueur), stdin);
         noretour(joueur.nomjoueur);
     }
-
+    
     printf("\nBienvenue aventurier %s\n\n", joueur.nomjoueur);
     stats1(&joueur);
-
+    
     evenement(&joueur);
     suite_evenements(&joueur);
-
-
+    malusbonus(&joueur);
+    
+    
     // Demande au joueur s'il veut sauvegarder sa partie
     printf("\nSauvegarder la progression ? (o/n) : ");
     fflush(stdout); // Assure que la sortie est bien affichée
