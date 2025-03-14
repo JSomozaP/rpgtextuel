@@ -1,0 +1,20 @@
+#Format des quêtes pour RPG Pouet
+
+Vous souhaitez rajouter vos propre quêtes ? Rien de plus simple, suivez la marche à suivre ci-dessous et rajoutez vos quêtes dans le fichier quetes.txt
+Chaque quête est définie comme suit :
+
+1. Le numéro de la quête
+2. Une ligne descriptive
+2. Une ligne contenant "CHOIX:"
+3. Trois choix, numérotés 1 à 3
+4. Une ligne indiquant les effets du choix (PV, Endurance, Or)
+
+Exemple :
+"Vous rencontrez un troll unijambiste fluorescent qui vous défis à un duel de breakdance."
+CHOIX:
+1. Tentez de lui péter la gueule (-30 PV, -5 Endurance, +20 Or)
+-30 -5 20
+2. Vous lui jeter de l'or pour tenter de faire diversion et vous enfuir (+0 PV, +0 Endurance, -5 Or)
+0 0 -5
+3. Vous accepter le duel et sortez vos plus beaux moves de breakdance (-10 PV, -10 Endurance, +0 Or)
+-10 -10 0

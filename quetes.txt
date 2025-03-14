@@ -1,0 +1,18 @@
+=== Quête 1 ===
+Vous vous réveillez au beau milieu d'une forêt, en sous-vêtements, une bourse contenant 100 pièces d'or accrochée à votre taille, sans aucun souvenir. Trois chemins s'offrent à vous. Que faites-vous ?
+1. Prendre le sentier de gauche nimbé de ténèbres qui s'enfonce dans la forêt.
+2. Avancer sur le sentier en face de vous, le chemin semble dégagé et sûr.
+3. Prendre le sentier de droite où un épais brouillard est présent.
+1:Vous vous enfoncez dans les bois et trouvez un coffre abandonné. Vous obtenez un sous-vêtement blindé et de l'or.|or+100|event+1
+2:Un gorille albinos parlant se dresse devant vous. Il se nomme Brandon et affirme qu'il doit vous tester physiquement ! Vous perdez 15 PV, ce fut violent.|pv-15|event+1
+3:Vous trébuchez lamentablement après vous être cogné le petit orteil sur une souche, vous perdez 15 points d'endurance.|endurance-15|event+1
+
+=== Quête 2 ===
+Tant bien que mal, vous arrivez devant une auberge perdue au milieu des bois. Que faites-vous ?
+1. Entrez pour prendre un repas et glaner quelques informations pour enfin comprendre où vous êtes.
+2. Vous ne tentez pas le diable et décidez de continuer votre route. Cette auberge est trop louche.
+3. Vous apercevez un client éméché affalé au sol, et vous décidez de lui faire les poches pour trouver un objet utile.
+1:Le repas vous réchauffe et vous redonne des forces (+5pv), mais coûte 5 pièces d'or. Le tavernier, ne comprenant pas pourquoi vous êtes en slip, décide de vous facturer 10 pièces d'or supplémentaires pour la gêne visuelle occasionnée.|pv+5|or-15|event+1
+2:Vous continuez votre chemin en remarquant que vous êtes suivis par un groupe de personnes encapuchonnées. Vous vous enfuyez de toutes vos forces et perdez 20 points d'endurance.|endurance-20|event+1
+3:Vous parvenez à lui dérober une belle bourse de 150 pièces d'or, c'est incroyable ! Malheureusement, le pochtrons se réveille et vous saute dessus. Vous parvenez finalement à le neutraliser, mais vous perdez 30 pv dans la bagarre.|or+150|pv-30|event+1
+
