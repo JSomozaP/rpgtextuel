@@ -1,18 +1,61 @@
+//=============== GUIDE DU CRÉATEUR DE QUÊTES ===============//
+// Bienvenue apprenti conteur d'histoires ! 
+// Voici comment créer tes propres quêtes pour RPG Pouet :
+
+// 1. STRUCTURE D'UNE QUÊTE
+// ------------------------
+// Chaque quête doit suivre ce format :
+// === Nom de la Quête ===
+// Description de la situation
+// Choix 1|Conséquence 1|modification1|modification2
+// Choix 2|Conséquence 2|modification1|modification2
+// Choix 3|Conséquence 3|modification1|modification2
+
+// 2. RÈGLES IMPORTANTES
+// --------------------
+// - Commence toujours ta quête par "=== Quête X ===" (où X est un numéro)
+// - Écris une description courte de la situation (max 2 lignes)
+// - Propose TOUJOURS 3 choix (ni plus, ni moins)
+// - Sépare le choix et sa conséquence par un | (touche AltGr+6)
+// - Garde les textes courts pour éviter les décalages
+// - Laisse une ligne vide entre chaque quête
+
+// 3. MODIFICATIONS POSSIBLES
+// ------------------------
+// Tu peux modifier les stats du joueur avec :
+// |pv+X  : Ajouter X points de vie
+// |pv-X  : Retirer X points de vie
+// |endurance+X : Ajouter X points d'endurance
+// |endurance-X : Retirer X points d'endurance
+// |or+X  : Ajouter X pièces d'or
+// |or-X  : Retirer X pièces d'or
+// |event+1 : Faire avancer l'histoire
+
+// 4. EXEMPLE DE QUÊTE
+// ------------------
+// === Quête Test ===
+// Tu trouves une pomme magique. Que fais-tu ?
+// Manger la pomme|Tu gagnes de la vie !|pv+10|event+1
+// Vendre la pomme|Tu gagnes de l'or !|or+50|event+1
+// Jeter la pomme|Tu trébuches en la jetant|endurance-5|event+1
+
+// 5. CONSEILS
+// ----------
+// - Teste ta quête avant de l'ajouter définitivement
+// - Évite les textes trop longs qui peuvent causer des problèmes d'affichage
+// - Pense à équilibrer les récompenses et les punitions
+// - Ajoute toujours |event+1 à la fin pour faire progresser l'histoire
+
+//====================== DÉBUT DES QUÊTES ======================//
+
 === Quête 1 ===
 Vous vous réveillez au beau milieu d'une forêt, en sous-vêtements, une bourse contenant 100 pièces d'or accrochée à votre taille, sans aucun souvenir. Trois chemins s'offrent à vous. Que faites-vous ?
-1. Prendre le sentier de gauche nimbé de ténèbres qui s'enfonce dans la forêt.
-2. Avancer sur le sentier en face de vous, le chemin semble dégagé et sûr.
-3. Prendre le sentier de droite où un épais brouillard est présent.
-1:Vous vous enfoncez dans les bois et trouvez un coffre abandonné. Vous obtenez un sous-vêtement blindé et de l'or.|or+100|event+1
-2:Un gorille albinos parlant se dresse devant vous. Il se nomme Brandon et affirme qu'il doit vous tester physiquement ! Vous perdez 15 PV, ce fut violent.|pv-15|event+1
-3:Vous trébuchez lamentablement après vous être cogné le petit orteil sur une souche, vous perdez 15 points d'endurance.|endurance-15|event+1
+Prendre le sentier de gauche nimbé de ténèbres qui s'enfonce dans la forêt.|Vous vous enfoncez dans les bois et trouvez un coffre abandonné. Vous obtenez un sous-vêtement blindé et de l'or.|or+100|event+1
+Avancer sur le sentier en face de vous, le chemin semble dégagé et sûr.|Un gorille albinos parlant se dresse devant vous. Il se nomme Brandon et affirme qu'il doit vous tester physiquement ! Vous perdez 15 PV, ce fut violent.|pv-15|event+1
+Prendre le sentier de droite où un épais brouillard est présent.|Vous trébuchez lamentablement après vous être cogné le petit orteil sur une souche, vous perdez 15 points d'endurance.|endurance-15|event+1
 
 === Quête 2 ===
 Tant bien que mal, vous arrivez devant une auberge perdue au milieu des bois. Que faites-vous ?
-1. Entrez pour prendre un repas et glaner quelques informations pour enfin comprendre où vous êtes.
-2. Vous ne tentez pas le diable et décidez de continuer votre route. Cette auberge est trop louche.
-3. Vous apercevez un client éméché affalé au sol, et vous décidez de lui faire les poches pour trouver un objet utile.
-1:Le repas vous réchauffe et vous redonne des forces (+5pv), mais coûte 5 pièces d'or. Le tavernier, ne comprenant pas pourquoi vous êtes en slip, décide de vous facturer 10 pièces d'or supplémentaires pour la gêne visuelle occasionnée.|pv+5|or-15|event+1
-2:Vous continuez votre chemin en remarquant que vous êtes suivis par un groupe de personnes encapuchonnées. Vous vous enfuyez de toutes vos forces et perdez 20 points d'endurance.|endurance-20|event+1
-3:Vous parvenez à lui dérober une belle bourse de 150 pièces d'or, c'est incroyable ! Malheureusement, le pochtrons se réveille et vous saute dessus. Vous parvenez finalement à le neutraliser, mais vous perdez 30 pv dans la bagarre.|or+150|pv-30|event+1
-
+Entrer pour prendre un repas et glaner des informations.|Le repas vous réchauffe (+5pv), mais coûte 15 pièces d'or à cause de votre tenue.|pv+5|or-15|event+1
+Continuer votre route, l'auberge semble louche.|Vous fuyez des personnes encapuchonnées qui vous suivent, perdant 20 points d'endurance.|endurance-20|event+1
+Faire les poches d'un client éméché.|Vous trouvez 150 pièces d'or mais perdez 30 pv dans la bagarre qui s'ensuit.|or+150|pv-30|event+1

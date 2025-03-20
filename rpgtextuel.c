@@ -61,29 +61,24 @@ void stats1(struct player *joueur)
     printf("-------------------------------------\n");
 }
 
-void malusbonus(struct player *joueur)
-{
-
-    if (joueur->pv <= 0)
-    {
-        printf("Vous êtes mort, votre aventure se termine içi, les légendes ne parleront jamais de vous\n");
-        exit(0);
+// Fonction pour appliquer les malus/bonus en fonction des stats du joueur
+void malusbonus(struct player *joueur) {
+    if (joueur->pv <= 0) { // Si les points de vie sont à 0 ou moins
+        printf("Vous êtes mort, votre aventure se termine ici. Les légendes ne parleront jamais de vous.\n");
+        exit(0); // Termine le programme
     }
-    if (joueur->or >= 1000)
-    {
-        printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont remplies d'or\n");
-        exit(0);
+    if (joueur->or >= 1000) { // Si le joueur a plus de 1000 pièces d'or
+        printf("Vous êtes riche ! Votre péril touche enfin à sa fin et vos poches sont remplies d'or.\n");
+        exit(0); // Termine le programme
     }
-    if (joueur->or <= 0)
-    {
-        printf("Votre bourse est désépèrement vide ! Votre éstomac cri famine, et vous perdez 5 points de vie et d'endurance par tour\n");
-        joueur->endurance -= 5;
-        joueur->pv -= 5;
+    if (joueur->or <= 0) { // Si le joueur n'a plus d'or
+        printf("Votre bourse est désespérément vide ! Votre estomac cri famine, et vous perdez 5 points de vie et d'endurance par tour.\n");
+        joueur->endurance -= 5; // Réduit l'endurance de 5
+        joueur->pv -= 5; // Réduit les points de vie de 5
     }
-    if (joueur->endurance <= 0)
-    {
-        printf("Vous n'avez plus d'endurance ! Vous déperisser à vue d'oeil, et perdez 5 points de vie par tour\n");
-        joueur->pv -= 5;
+    if (joueur->endurance <= 0) { // Si l'endurance est à 0 ou moins
+        printf("Vous n'avez plus d'endurance ! Vous dépérissez à vue d'œil et perdez 5 points de vie par tour.\n");
+        joueur->pv -= 5; // Réduit les points de vie de 5
     }
 }
 
