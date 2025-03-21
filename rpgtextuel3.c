@@ -12,7 +12,7 @@
 
 // On définit la taille maximum d'un texte qu'on peut lire
 // C'est comme définir la taille d'une feuille de papier !
-#define BUF_SIZE 255
+#define BUF_SIZE 255 // Taille du buffer pour la lecture des chaînes
 
 /*
  * Cette structure représente ton personnage, comme une fiche de héros !
@@ -23,7 +23,7 @@
  * - Son or : pour acheter des objets ou payer ton chemin
  * - L'événement en cours : pour savoir où tu en es dans l'histoire
  */
-struct player
+struct player  // Structure pour représenter le joueur
 {
     int pv;             // Points de vie (0 = mort)
     int endurance;      // Energie pour les actions difficiles
@@ -38,7 +38,7 @@ struct player
  * Cette fonction enlève ce retour à la ligne pour que ce soit plus propre
  * C'est comme effacer les petits débordements sur ta feuille !
  */
-void noretour(char *str)
+void noretour(char *str) // Fonction pour supprimer le retour à la ligne d'une chaîne
 {
     size_t len = strlen(str); // On compte la longueur du texte
     if (len > 0 && str[len - 1] == '\n')
@@ -53,10 +53,10 @@ void noretour(char *str)
  * Elle écrit toutes les informations de ton personnage dans un fichier magique
  * appelé "saverpg" (comme "save RPG" = "sauvegarder le jeu de rôle")
  */
-void sauvegarder(struct player *joueur)
+void sauvegarder(struct player *joueur) // Fonction pour sauvegarder la progression du joueur
 {
     // On ouvre le fichier magique en mode écriture ("w" pour "write" = écrire)
-    FILE *save = fopen("saverpg", "w");
+    FILE *save = fopen("saverpg", "w"); 
     if (save)
     { // Si le fichier s'est bien ouvert
         // On écrit toutes les informations de ton personnage
@@ -82,7 +82,7 @@ void sauvegarder(struct player *joueur)
  * Elle lit toutes les informations de ton personnage depuis le fichier magique "saverpg"
  * et les remet dans le jeu comme si tu n'avais jamais arrêté de jouer
  */
-void charger(struct player *joueur)
+void charger(struct player *joueur) // Fonction pour charger une sauvegarde
 {
     // On ouvre le fichier magique en mode lecture ("r" pour "read" = lire)
     FILE *save = fopen("saverpg", "r");
@@ -107,7 +107,7 @@ void charger(struct player *joueur)
  * - Combien d'or tu possèdes
  * - Où tu en es dans l'histoire (event)
  */
-void stats1(struct player *joueur)
+void stats1(struct player *joueur) // Fonction pour afficher les statistiques du joueur
 {
     printf("\n---------Statistiques de %s---------\n", joueur->nomjoueur);
     printf("PV: %d\nEndurance: %d\nOr: %d\nEvent: %d\n",
@@ -126,7 +126,7 @@ void stats1(struct player *joueur)
  * 3. Si tu n'as plus d'or → Tu perds de la vie et de l'endurance (tu as faim !)
  * 4. Si tu n'as plus d'endurance → Tu perds de la vie (tu es épuisé !)
  */
-void malusbonus(struct player *joueur)
+void malusbonus(struct player *joueur) // Fonction pour appliquer les malus/bonus en fonction des stats du joueur
 {
     // Vérifie si le joueur est mort (PV ≤ 0)
     if (joueur->pv <= 0)
@@ -173,18 +173,18 @@ void malusbonus(struct player *joueur)
  * C'est comme un maître du jeu qui lit l'histoire et gère ce qui se passe
  * selon tes choix !
  */
-void executer_quete(struct player *joueur, FILE *fichier)
+void executer_quete(struct player *joueur, FILE *fichier) // On lit une quête depuis un fichier
 {
     // On prépare des "boîtes" pour stocker le texte qu'on va lire
-    char ligne[BUF_SIZE];                             // Pour lire une ligne du fichier
-    char texte_quete[BUF_SIZE * 10] = "";             // Pour l'histoire de la quête
-    char choix[3][BUF_SIZE * 5] = {"", "", ""};       // Pour les 3 choix possibles
-    char consequence[3][BUF_SIZE * 5] = {"", "", ""}; // Pour ce qui arrive après chaque choix
+    char ligne[BUF_SIZE];                             // Pour lire une ligne du fichier (Buffer pour stocker une ligne lue depuis le fichier)
+    char texte_quete[BUF_SIZE * 10] = "";             // Pour l'histoire de la quête (Buffer pour stocker le texte de la quête)
+    char choix[3][BUF_SIZE * 5] = {"", "", ""};       // Pour les 3 choix possibles (Tableau pour stocker les 3 choix possibles)
+    char consequence[3][BUF_SIZE * 5] = {"", "", ""}; // Pour ce qui arrive après chaque choix (Tableau pour stocker les 3 conséquences possibles)
     int i = 0;                                        // Pour compter où on en est
     int choix_joueur = -1;                            // Pour enregistrer ton choix (-1 = pas encore choisi)
 
     /* ÉTAPE 1 : Lire l'histoire de la quête */
-    if (fgets(ligne, BUF_SIZE, fichier) == NULL)
+    if (fgets(ligne, BUF_SIZE, fichier) == NULL) // On lit une ligne du fichier
     {
         return; // Si on ne peut pas lire, on arrête
     }
@@ -192,10 +192,10 @@ void executer_quete(struct player *joueur, FILE *fichier)
     strcpy(texte_quete, ligne); // On la copie dans notre boîte à histoire
 
     /* ÉTAPE 2 : Lire les trois choix possibles et leurs conséquences */
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) // On lit les 3 choix possibles
     {
         // D'abord, on lit le choix
-        if (fgets(ligne, BUF_SIZE, fichier) == NULL)
+        if (fgets(ligne, BUF_SIZE, fichier) == NULL) // Si on ne peut pas lire
         {
             fprintf(stderr, "Erreur de lecture des choix\n");
             return;
@@ -203,8 +203,8 @@ void executer_quete(struct player *joueur, FILE *fichier)
         noretour(ligne);
 
         // On cherche le symbole '|' qui sépare le choix de sa conséquence
-        char *sep = strchr(ligne, '|');
-        if (sep != NULL)
+        char *sep = strchr(ligne, '|'); // On cherche le symbole '|'
+        if (sep != NULL)               // Si on a trouvé le symbole '|'
         {
             *sep = '\0';                     // On coupe la ligne au niveau du '|'
             strcpy(choix[i], ligne);         // On copie le choix
@@ -212,76 +212,76 @@ void executer_quete(struct player *joueur, FILE *fichier)
         }
         else
         {
-            fprintf(stderr, "Erreur de format du fichier de quêtes\n");
+            fprintf(stderr, "Erreur de format du fichier de quêtes\n"); // Si on n'a pas trouvé le '|'
             return;
         }
     }
 
     /* ÉTAPE 3 : Montrer l'histoire et les choix au joueur */
-    printf("\n%s\n", texte_quete);
+    printf("\n%s\n", texte_quete); // Affiche le texte de la quête
     for (i = 0; i < 3; i++)
-    {
-        printf("%d. %s\n", i + 1, choix[i]);
+    {                                       // Boucle pour afficher les 3 choix
+        printf("%d. %s\n", i + 1, choix[i]);// Affiche chaque choix avec un numéro
     }
 
     /* ÉTAPE 4 : Attendre que le joueur fasse un choix valide */
     do
     {
-        printf("Votre choix (1-3): ");
+        printf("Votre choix (1-3): "); // Demande au joueur de faire un choix
         // On vérifie que le joueur entre bien un nombre
-        if (scanf("%d", &choix_joueur) != 1)
+        if (scanf("%d", &choix_joueur) != 1) // Si l'entrée n'est pas un nombre
         {
             fprintf(stderr, "Erreur : Entrée invalide.\n");
             while (getchar() != '\n')
-                ; // On nettoie ce qui reste dans l'entrée
+                ; // On nettoie ce qui reste dans l'entrée en vidant le buffer
             choix_joueur = -1;
         }
         // On vérifie que le nombre est entre 1 et 3
         else if (choix_joueur < 1 || choix_joueur > 3)
-        {
+        {                   //si le choix est invalide
             printf("Choix invalide. Veuillez entrer un nombre entre 1 et 3.\n");
         }
-    } while (choix_joueur < 1 || choix_joueur > 3);
+    } while (choix_joueur < 1 || choix_joueur > 3); // boucle tant que le choix n'est pas valide
 
     /* ÉTAPE 5 : Appliquer la conséquence du choix */
     // On prépare un espace pour traiter la conséquence
-    char consequence_buffer[BUF_SIZE * 5];
-    strncpy(consequence_buffer, consequence[choix_joueur - 1], BUF_SIZE * 5 - 1);
-    consequence_buffer[BUF_SIZE * 5 - 1] = '\0';
+    char consequence_buffer[BUF_SIZE * 5]; // Pour stocker la conséquence
+    strncpy(consequence_buffer, consequence[choix_joueur - 1], BUF_SIZE * 5 - 1); // On copie la conséquence
+    consequence_buffer[BUF_SIZE * 5 - 1] = '\0';  // On s'assure que la chaîne est bien terminée
 
     // On sépare le texte de la conséquence des modifications de stats
-    char *texte = consequence_buffer;
-    char *sep2 = strchr(texte, '|');
-    if (sep2 != NULL)
+    char *texte = consequence_buffer; // On garde une copie du texte
+    char *sep2 = strchr(texte, '|'); // On cherche le symbole '|'
+    if (sep2 != NULL) // S'il y a un '|'
     {
         *sep2 = '\0';            // On coupe au niveau du '|'
         printf("\n%s\n", texte); // On affiche ce qui se passe
 
         // On fait une copie pour pouvoir la modifier sans danger
-        char consequence_copy[BUF_SIZE * 5];
-        strncpy(consequence_copy, consequence[choix_joueur - 1], BUF_SIZE * 5 - 1);
-        consequence_copy[BUF_SIZE * 5 - 1] = '\0';
+        char consequence_copy[BUF_SIZE * 5]; // On copie la conséquence
+        strncpy(consequence_copy, consequence[choix_joueur - 1], BUF_SIZE * 5 - 1); // On copie la conséquence
+        consequence_copy[BUF_SIZE * 5 - 1] = '\0';  // On s'assure que la chaîne est bien terminée
 
         // On cherche toutes les modifications de stats (ce qui commence par '|')
-        char *token = consequence_copy;
-        while ((token = strchr(token, '|')))
+        char *token = consequence_copy; // On garde une copie de la conséquence
+        while ((token = strchr(token, '|'))) // Tant qu'on trouve un '|'
         {
             token++; // On avance après le '|'
             // On regarde quel type de modification il faut faire
             if (strncmp(token, "pv+", 3) == 0) // Gagner des points de vie
-                joueur->pv += atoi(token + 3);
+                joueur->pv += atoi(token + 3); // On ajoute les points de vie
             else if (strncmp(token, "pv-", 3) == 0) // Perdre des points de vie
-                joueur->pv -= atoi(token + 3);
+                joueur->pv -= atoi(token + 3); // On retire les points de vie
             else if (strncmp(token, "endurance+", 10) == 0) // Gagner de l'endurance
-                joueur->endurance += atoi(token + 10);
+                joueur->endurance += atoi(token + 10); // On ajoute de l'endurance
             else if (strncmp(token, "endurance-", 10) == 0) // Perdre de l'endurance
-                joueur->endurance -= atoi(token + 10);
+                joueur->endurance -= atoi(token + 10); // On retire de l'endurance
             else if (strncmp(token, "or+", 3) == 0) // Gagner de l'or
-                joueur->or += atoi(token + 3);
+                joueur->or += atoi(token + 3); // On ajoute de l'or
             else if (strncmp(token, "or-", 3) == 0) // Perdre de l'or
-                joueur->or -= atoi(token + 3);
+                joueur->or -= atoi(token + 3); // On retire de l'or
             else if (strncmp(token, "event+", 6) == 0) // Avancer dans l'histoire
-                joueur->event += atoi(token + 6);
+                joueur->event += atoi(token + 6); // On avance dans l'histoire
         }
     }
     else
@@ -319,7 +319,7 @@ int main()
 
     /* ÉTAPE 3 : Proposer de charger une partie existante */
     printf("Charger une sauvegarde ? (o/n) : ");
-    char choix;
+    char choix;           // On crée une variable pour stocker ta réponse
     scanf(" %c", &choix); // On lit ta réponse
     getchar();            // On nettoie le retour à la ligne
 
@@ -347,10 +347,10 @@ int main()
     }
 
     /* ÉTAPE 6 : Lire et jouer chaque quête */
-    char ligne[BUF_SIZE];
-    while (fgets(ligne, BUF_SIZE, fichier_quetes) != NULL)
+    char ligne[BUF_SIZE]; // On crée un buffer pour lire les lignes
+    while (fgets(ligne, BUF_SIZE, fichier_quetes) != NULL) 
     { // Tant qu'il y a des lignes à lire
-        if (strncmp(ligne, "===", 3) == 0)
+        if (strncmp(ligne, "===", 3) == 0)  
         {                                            // Si on trouve le début d'une quête
             executer_quete(&joueur, fichier_quetes); // On lance la quête
         }
